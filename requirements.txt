@@ -3,4 +3,4 @@ Translator
 googletrans
 SpeechRecognition
 pyttsx3
-
+mutagen
