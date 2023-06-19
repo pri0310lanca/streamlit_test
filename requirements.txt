@@ -1,0 +1,4 @@
+stremlit
+speech_recognition
+Translator
+pyttsx3
