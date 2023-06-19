@@ -3,7 +3,4 @@ Translator
 googletrans
 SpeechRecognition
 pyttsx3
-mutagen.mp3
-mp3
-time
-sleep
+
