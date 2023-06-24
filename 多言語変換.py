@@ -20,10 +20,10 @@ st.set_page_config(
  )
 
 #音声入力選択
-red =st.sidebar.radio("Choice",["音声データ選択","リアルタイム翻訳（デモ用）"]) 
+red =st.sidebar.radio("Choice",["リアルタイム放送","音声データ選択"]) 
 #HTML表示UI設定
 st.title("多言語翻訳放送プロトタイプ")
-#st.subheader("with googletrans")
+st.subheader("with googletrans")
 
 #翻訳言語選択
 selected_item = st.sidebar.selectbox('Select langage', ['afrikaans', 'albanian', 'amharic','arabic','armenian','azerbaijani','basque','belarusian','bengali','bosnian',\
