@@ -4,3 +4,4 @@ googletrans
 SpeechRecognition
 pyttsx3
 mutagen
+Pyaudio
