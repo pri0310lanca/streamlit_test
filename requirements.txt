@@ -4,4 +4,3 @@ googletrans
 SpeechRecognition
 pyttsx3
 mutagen
-speech_recognition
