@@ -1,6 +1,6 @@
 streamlit
 Translator
-googletrans
+googletrans==3.1.0a0
 SpeechRecognition
 pyttsx3
 mutagen
