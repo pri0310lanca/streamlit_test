@@ -10,6 +10,10 @@ import pyttsx3
 #import pygame
 from mutagen.mp3 import MP3 as mp3
 from time import sleep
+import streamlit.components.v1 as stc
+import base64
+from gtts import gTTS
+
 
 #webブラウザ設定
 st.set_page_config(
@@ -115,12 +119,13 @@ if red == "音声データ選択":
             audio = r.record(source)
             result = r.recognize_google(audio, language="ja-JP")
         # 音声合成の定義
-        def TextToSpeech_pyttsx3(ph):
-            engine = pyttsx3.init()
-            voices = engine.getProperty('voices')
-            engine.setProperty("voice", voices[0].id)
-            engine.say(ph)
-            engine.runAndWait()
+        #def TextToSpeech_pyttsx3(ph):
+            #engine = pyttsx3.init()
+            #voices = engine.getProperty('voices')
+            #engine.setProperty("voice", voices[0].id)
+            #engine.say(ph)
+            #engine.runAndWait()
+
         # 翻訳（日本語から外国語）の定義    
         def Translate_ja_to_en(word):
             # from googletrans import Translator
@@ -135,5 +140,18 @@ if red == "音声データ選択":
         st.sidebar.subheader(result)
         st.header(word2)
         #選択言語の音声出力
-        TextToSpeech_pyttsx3(word2)
+        #TextToSpeech_pyttsx3(word2)
 
+        #選択言語の音声出力(streamlittest)
+        tts_en = gTTS(word2,
+                lang = "en"
+                )
+        tts_en.save('word2.mp3')
+        audio_file = open('word2.mp3', 'rb')
+        audio_bytes = audio_file.read()
+
+        st.audio(audio_bytes, format='audio/ogg')
+
+        sample_rate = 44100  # 44100 samples per second
+        seconds = 2  # Note duration of 2 seconds
+        frequency_la = 440  # Our played note will be 440 Hz
