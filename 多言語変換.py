@@ -11,6 +11,7 @@ import soundfile as sf
 from urllib.request import urlopen
 from shutil import copyfileobj
 import requests
+import urllib.request
 #webブラウザ設定
 st.set_page_config(
      page_title="多言語翻訳放送プロトタイプ",
@@ -171,7 +172,8 @@ if red == "業務放送（デモ）":
     if submit_btn:
         #githubのURL指定（録音データをこのディレクトリに格納する.pyを作成予定）
         url = "https://github.com/pri0310lanca/streamlit_test/raw/main/isshoniganbattemiyou_01.wav"
-        response = requests.get(url)
+        #response = requests.get(url)
+        audio_file = urllib.request.urlopen(url).read()
         #get 成功の場合、下で200のコードを返す
         #print(response.status_code)
         file = open("audio_file","rb")
