@@ -5,4 +5,4 @@ SpeechRecognition
 mutagen
 playsound
 gTTS
-oundfile
+soundfile
