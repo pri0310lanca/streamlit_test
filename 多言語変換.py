@@ -173,22 +173,25 @@ if red == "業務放送（デモ）":
         #githubのURL指定（録音データをこのディレクトリに格納する.pyを作成予定）
         url = "https://github.com/pri0310lanca/streamlit_test/raw/main/isshoniganbattemiyou_01.wav"
         #response = requests.get(url)
+        save_name = "audio_download"
         audio_file = urllib.request.urlopen(url).read()
+        with open('save_name', mode="wb") as f:
+            f.write(audio_file)
         #get 成功の場合、下で200のコードを返す
         #print(response.status_code)
-        file = open("audio_file","rb")
+        #file = open("audio_file","rb")
         #下で日本語を読み込む
         #audio_bytes = file.read()
         #ここでダウンロードしたファイルを再wav化
-        wf = wave.open("audio_file","rb")
+        wf = wave.open("save_name","rb")
 
         # wavファイルを日本語に翻訳
         r = speech_recognition.Recognizer()
         # （file）で相対パスを指定。GUIファイルと連携
-        with speech_recognition.AudioFile("audio_file") as source:
+        with speech_recognition.AudioFile("save_name") as source:
             audio = r.record(source)
             result = r.recognize_google(audio, language="ja-JP")
-        file.close()
+        #file.close()
         wf.close()
 
         # 翻訳（日本語から外国語）の定義    
