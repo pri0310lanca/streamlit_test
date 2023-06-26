@@ -13,8 +13,15 @@ from time import sleep
 import streamlit.components.v1 as stc
 import base64
 from gtts import gTTS
-
-
+import urllib.request
+import ffmpeg
+import pathlib
+import wave
+import subprocess
+import soundfile as sf
+from urllib.request import urlopen
+from shutil import copyfileobj
+import requests
 #webブラウザ設定
 st.set_page_config(
      page_title="多言語翻訳放送プロトタイプ",
@@ -24,7 +31,7 @@ st.set_page_config(
  )
 
 #音声入力選択
-red =st.sidebar.radio("Choice",["リアルタイム放送","音声データ選択"]) 
+red =st.sidebar.radio("モードセレクト",["業務放送（デモ）","デバイス音声データ翻訳"]) 
 #HTML表示UI設定
 st.title("多言語翻訳放送プロトタイプ")
 st.subheader("with googletrans")
@@ -48,7 +55,114 @@ st.sidebar.subheader("-------CAUTION------")
 st.sidebar.text("中国語（簡体）= you select zh-CN")
 st.sidebar.text("中国語（繁体）= you select zh-TW")
 st.sidebar.subheader("--------------------")
-
+st.sidebar.subheader("")
+st.sidebar.subheader("langage list (total:105) ")
+st.sidebar.text('afrikaans')
+st.sidebar.text('albanian')
+st.sidebar.text('amharic')
+st.sidebar.text('arabic')
+st.sidebar.text('armenian')
+st.sidebar.text('azerbaijani')
+st.sidebar.text('basque')
+st.sidebar.text('belarusian')
+st.sidebar.text('bengali')
+st.sidebar.text('bosnian')
+st.sidebar.text('bulgarian')
+st.sidebar.text('catalan')
+st.sidebar.text('cebuano')
+st.sidebar.text('chichewa')
+st.sidebar.text('chinese (simplified)')
+st.sidebar.text('chinese (traditional)')
+st.sidebar.text('corsican')
+st.sidebar.text('croatian')
+st.sidebar.text('czech')
+st.sidebar.text('danish')
+st.sidebar.text('dutch')
+st.sidebar.text('english')
+st.sidebar.text('esperanto')
+st.sidebar.text('estonian')
+st.sidebar.text('filipino')
+st.sidebar.text('finnish')
+st.sidebar.text('french')
+st.sidebar.text('frisian')
+st.sidebar.text('galician')
+st.sidebar.text('georgian')
+st.sidebar.text('german')
+st.sidebar.text('greek')
+st.sidebar.text('gujarati')
+st.sidebar.text('haitian creole')
+st.sidebar.text('hausa')
+st.sidebar.text('hawaiian')
+st.sidebar.text('hebrew')
+st.sidebar.text('hindi')
+st.sidebar.text('hmong')
+st.sidebar.text('hungarian')
+st.sidebar.text('icelandic')
+st.sidebar.text('igbo')
+st.sidebar.text('indonesian')
+st.sidebar.text('irish')
+st.sidebar.text('italian')
+st.sidebar.text('japanese')
+st.sidebar.text('javanese')
+st.sidebar.text('kannada')
+st.sidebar.text('kazakh')
+st.sidebar.text('khmer')
+st.sidebar.text('korean')
+st.sidebar.text('kurdish (kurmanji)')
+st.sidebar.text('kyrgyz')
+st.sidebar.text('lao')
+st.sidebar.text('latin')
+st.sidebar.text('latvian')
+st.sidebar.text('lithuanian')
+st.sidebar.text('luxembourgish')
+st.sidebar.text('macedonian')
+st.sidebar.text('malagasy')
+st.sidebar.text('malay')
+st.sidebar.text('malayalam')
+st.sidebar.text('maltese')
+st.sidebar.text('maori')
+st.sidebar.text('marathi')
+st.sidebar.text('mongolian')
+st.sidebar.text('myanmar (burmese)')
+st.sidebar.text('nepali')
+st.sidebar.text('norwegian')
+st.sidebar.text('odia')
+st.sidebar.text('pashto')
+st.sidebar.text('persian')
+st.sidebar.text('polish')
+st.sidebar.text('portuguese')
+st.sidebar.text('punjabi')
+st.sidebar.text('romanian')
+st.sidebar.text('russian')
+st.sidebar.text('samoan')
+st.sidebar.text('scots gaelic')
+st.sidebar.text('serbian')
+st.sidebar.text('sesotho')
+st.sidebar.text('shona')
+st.sidebar.text('sindhi')
+st.sidebar.text('sinhala')
+st.sidebar.text('slovak')
+st.sidebar.text('slovenian')
+st.sidebar.text('somali')
+st.sidebar.text('spanish')
+st.sidebar.text('sundanese')
+st.sidebar.text('swahili')
+st.sidebar.text('swedish')
+st.sidebar.text('tajik')
+st.sidebar.text('tamil')
+st.sidebar.text('telugu')
+st.sidebar.text('thai')
+st.sidebar.text('turkish')
+st.sidebar.text('ukrainian')
+st.sidebar.text('urdu')
+st.sidebar.text('uyghur')
+st.sidebar.text('uzbek')
+st.sidebar.text('vietnamese')
+st.sidebar.text('welsh')
+st.sidebar.text('xhosa')
+st.sidebar.text('yiddish')
+st.sidebar.text('yoruba')
+st.sidebar.text('zulu')
 afrikaans = "af";albanian ="sq";amharic ="am";arabic = "ar";armenian = "hy";azerbaijani = "az";basque = "eu";belarusian = "be";bengali = "bn";bosnian = "bs"
 bulgarian = "bg";catalan = "ca";cebuano = "ceb";chichewa = "ny";#chinese = "zh-cn";#traditional = "tw"\;
 corsican = "co";croatian = "hr";czech = "cs"
@@ -63,68 +177,28 @@ sinhala = "si";slovak = "sk";slovenian = "sl";somali = "so";spanish = "es";sunda
 thai = "th";turkish = "tr";ukrainian = "uk";urdu = "ur";uyghur = "ug";uzbek = "uz";vietnamese = "vi";welsh = "cy";xhosa = "xh";yiddish = "yi";yoruba = "yo";zulu = "zu"
 
 # 翻訳定義 （リアルタイム） 
-if red == "リアルタイム放送":
-    def Translate_ja_to_en(word):
-        # from googletrans import Translator
-        translator  = Translator()
-        word2 = translator.translate(word, src='ja', dest=selected_item)
-        text = word2.text
-        #st.write(text)
-        return text
-    # 音声合成定義
-    def TextToSpeech_pyttsx3(ph):
-        engine = pyttsx3.init()
-        voices = engine.getProperty('voices')
-        engine.setProperty("voice", voices[1].id)
-        engine.say(ph)
-        engine.runAndWait()
-    #リアルタイム音声翻訳
-    #音声入力　テキスト出力 音声出力
-    def record():
-        r = sr.Recognizer()
-        with sr.Microphone() as source:
-            r.adjust_for_ambient_noise(source)
-            print("何かお話しして下さい。")
-            st.sidebar.subheader("何かお話しして下さい。")
-            audio = r.listen(source)
-            try:
-                result = r.recognize_google(audio, language='ja-JP')
-                print(result)
-                st.sidebar.subheader(result)
-            except Exception:
-                st.sidebar.subheader("音声検知できませんでした")               
-                print("音声検知できませんでした")
-            else:
-                # word1 = input("翻訳する言葉を入力して！")
-                word1 = result
-                word2 = Translate_ja_to_en(word1)
-                print(word2)
-                st.header(word2)
-                TextToSpeech_pyttsx3(word2)
-    st.warning("「録音」ボタンを押して放送してください")
-    if st.button("録音"):
-        record()
-    st.success("------translate text-----")
-
-if red == "音声データ選択":
-    # 音声ファイルをアップロードする
-    audio_file = st.file_uploader("音声ファイルをアップロードしてください", type=["mp3", "wav"])
-    submit_btn = st.button("送信")
+if red == "業務放送（デモ）":
+    submit_btn = st.button("業務放送（デモ）翻訳START")
     if submit_btn:
-        st.write("音声ファイルを送信しました")
+        #githubのURL指定（録音データをこのディレクトリに格納する.pyを作成予定）
+        url = "https://github.com/pri0310lanca/streamlit_test/raw/main/isshoniganbattemiyou_01.wav"
+        response = requests.get(url)
+        #get 成功の場合、下で200のコードを返す
+        #print(response.status_code)
+        file = open("audio_file","rb")
+        #下で日本語を読み込む
+        #audio_bytes = file.read()
+        #ここでダウンロードしたファイルを再wav化
+        wf = wave.open("audio_file","rb")
+
         # wavファイルを日本語に翻訳
         r = speech_recognition.Recognizer()
         # （file）で相対パスを指定。GUIファイルと連携
-        with speech_recognition.AudioFile(audio_file) as source:
+        with speech_recognition.AudioFile("audio_file") as source:
             audio = r.record(source)
             result = r.recognize_google(audio, language="ja-JP")
-        # 音声合成の定義
-        #def TextToSpeech_pyttsx3(ph):
-            #engine = pyttsx3.init()
-            #voices = engine.getProperty('voices')
-            #engine.setProperty("voice", voices[0].id)
-            #engine.say(ph)
-            #engine.runAndWait()
+        file.close()
+        wf.close()
 
         # 翻訳（日本語から外国語）の定義    
         def Translate_ja_to_en(word):
@@ -136,11 +210,53 @@ if red == "音声データ選択":
         word1 = result
         word2 = Translate_ja_to_en(word1)
         print(r.recognize_google(audio, language='ja-JP'))
-        st.sidebar.subheader("日本語認識")
-        st.sidebar.subheader(result)
+        st.text("---日本語テキスト---")
+        st.subheader(result)
+        st.text("---翻訳テキスト---")
         st.header(word2)
-        #選択言語の音声出力
-        #TextToSpeech_pyttsx3(word2)
+
+        #選択言語の音声出力(streamlittest)
+        tts_en = gTTS(word2,
+                lang = "en"
+                )
+        tts_en.save('word2.mp3')
+        audio_file = open('word2.mp3', 'rb')
+        audio_bytes = audio_file.read()
+        st.audio(audio_bytes, format='audio/ogg')
+        audio_file.close()
+        sample_rate = 44100  # 44100 samples per second
+        seconds = 2  # Note duration of 2 seconds
+        frequency_la = 440  # Our played note will be 440 Hz
+
+    st.success("------translate success-----")
+
+if red == "デバイス音声データ翻訳":
+    # 音声ファイルをアップロードする
+    audio_file = st.file_uploader("音声ファイルをアップロードしてください", type=["mp3", "wav"])
+    submit_btn = st.button("送信")
+    if submit_btn:
+        st.write("音声ファイルを送信しました")
+        # wavファイルを日本語に翻訳
+        r = speech_recognition.Recognizer()
+        # （file）で相対パスを指定。GUIファイルと連携
+        with speech_recognition.AudioFile(audio_file) as source:
+            audio = r.record(source)
+            result = r.recognize_google(audio, language="ja-JP")
+
+        # 翻訳（日本語から外国語）の定義    
+        def Translate_ja_to_en(word):
+            # from googletrans import Translator
+            translator  = Translator()
+            word2 = translator.translate(word, src='ja', dest=selected_item)
+            text = word2.text
+            return text
+        word1 = result
+        word2 = Translate_ja_to_en(word1)
+        print(r.recognize_google(audio, language='ja-JP'))
+        st.text("---日本語テキスト---")
+        st.subheader(result)
+        st.text("---翻訳テキスト---")
+        st.header(word2)
 
         #選択言語の音声出力(streamlittest)
         tts_en = gTTS(word2,
@@ -155,3 +271,4 @@ if red == "音声データ選択":
         sample_rate = 44100  # 44100 samples per second
         seconds = 2  # Note duration of 2 seconds
         frequency_la = 440  # Our played note will be 440 Hz
+        st.success("------translate success-----")
