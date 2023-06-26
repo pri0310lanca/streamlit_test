@@ -2,22 +2,11 @@ import streamlit as st
 import speech_recognition as sr
 import speech_recognition
 from googletrans import Translator
-import pyttsx3
-#import requests
-#from gtts import gTTS
-#from janome.tokenizer import Tokenizer
-#import pykakasi
-#import pygame
 from mutagen.mp3 import MP3 as mp3
 from time import sleep
 import streamlit.components.v1 as stc
-import base64
 from gtts import gTTS
-import urllib.request
-import ffmpeg
-import pathlib
 import wave
-import subprocess
 import soundfile as sf
 from urllib.request import urlopen
 from shutil import copyfileobj
