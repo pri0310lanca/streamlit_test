@@ -6,4 +6,3 @@ mutagen
 playsound
 gTTS
 soundfile
-urllib.requext
