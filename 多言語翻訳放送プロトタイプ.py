@@ -247,8 +247,6 @@ if st.session_state["authentication_status"]:
             seconds = 2  # Note duration of 2 seconds
             frequency_la = 440  # Our played note will be 440 Hz
 
-        st.success("------translate success-----")
-
     if red == "デバイス音声データ翻訳":
         # 音声ファイルをアップロードする
         audio_file = st.file_uploader("音声ファイルをアップロードしてください", type=["mp3", "wav"])
@@ -290,8 +288,7 @@ if st.session_state["authentication_status"]:
             sample_rate = 44100  # 44100 samples per second
             seconds = 2  # Note duration of 2 seconds
             frequency_la = 440  # Our played note will be 440 Hz
-            st.success("------translate success-----")    
-        st.text("LoginOK")
+   
 elif st.session_state["authentication_status"] is False:
     st.error('ユーザ名またはパスワードが間違っています')
 elif st.session_state["authentication_status"] is None:
