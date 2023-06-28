@@ -6,3 +6,4 @@ mutagen
 playsound
 gTTS
 soundfile
+streamlit_authenticator
