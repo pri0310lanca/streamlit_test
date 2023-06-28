@@ -7,3 +7,4 @@ playsound
 gTTS
 soundfile
 streamlit_authenticator
+yaml
