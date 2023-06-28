@@ -1,0 +1,13 @@
+cookie:
+  expiry_days: 0
+  key: some_signature_keys
+  name: some_cookie_name
+credentials:
+  usernames:
+    tuusinntouho:
+      email: hoge@hoge.com
+      name: Hoge chan
+      password: $2b$12$LmY3Liu4RqtIO.JrgbXRhe5nvgLXNi/CORNWuxfjrcLCbxyOdDmSi
+preauthorized:
+  emails:
+  - melsby@gmail.com
