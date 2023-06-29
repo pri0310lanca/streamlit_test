@@ -283,7 +283,7 @@ if st.session_state["authentication_status"]:
             audio_file = open('word2.mp3', 'rb')
             audio_bytes = audio_file.read()
 
-            st.audio(audio_bytes, format='audio/ogg')
+            st.audio(audio_bytes, format='audio/mpeg')
 
             sample_rate = 44100  # 44100 samples per second
             seconds = 2  # Note duration of 2 seconds
