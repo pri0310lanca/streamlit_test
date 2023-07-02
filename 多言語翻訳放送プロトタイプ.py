@@ -48,8 +48,7 @@ if st.session_state["authentication_status"]:
     #音声入力選択
     red =st.sidebar.radio("モードセレクト",["業務放送（デモ）","デバイス音声データ翻訳"]) 
     #HTML表示UI設定
-    st.title("多言語翻訳放送プロトタイプ")
-    st.subheader("with googletrans")
+    st.title("多言語放送プロトタイプ")
 
     #翻訳言語選択
     selected_item = st.sidebar.selectbox('Select langage', ['afrikaans', 'albanian', 'amharic','arabic','armenian','azerbaijani','basque','belarusian','bengali','bosnian',\
@@ -229,10 +228,10 @@ if st.session_state["authentication_status"]:
             word1 = result
             word2 = Translate_ja_to_en(word1)
             print(r.recognize_google(audio, language='ja-JP'))
-            st.text("---日本語テキスト---")
-            st.subheader(result)
-            st.text("---翻訳テキスト---")
-            st.header(word2)
+            st.text("---------日本語テキスト---------")
+            st.header(result)
+            st.text("---------Translate Text.---------")
+            st.title(word2)
 
             #選択言語の音声出力(streamlittest)
             tts_en = gTTS(word2,
@@ -270,10 +269,10 @@ if st.session_state["authentication_status"]:
             word1 = result
             word2 = Translate_ja_to_en(word1)
             print(r.recognize_google(audio, language='ja-JP'))
-            st.text("---日本語テキスト---")
-            st.subheader(result)
-            st.text("---翻訳テキスト---")
-            st.header(word2)
+            st.text("---------日本語テキスト---------")
+            st.header(result)
+            st.text("---------Translate Text.---------")
+            st.title(word2)
 
             #選択言語の音声出力(streamlittest)
             tts_en = gTTS(word2,
