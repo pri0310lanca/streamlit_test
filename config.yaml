@@ -4,7 +4,7 @@ cookie:
   name: some_cookie_name
 credentials:
   usernames:
-    tuusinntouho:
+    tusintouhoku:
       email: hoge@hoge.com
       name: Hoge chan
       password: $2b$12$LmY3Liu4RqtIO.JrgbXRhe5nvgLXNi/CORNWuxfjrcLCbxyOdDmSi
