@@ -171,7 +171,7 @@ sinhala = "si";slovak = "sk";slovenian = "sl";somali = "so";spanish = "es";sunda
 thai = "th";turkish = "tr";ukrainian = "uk";urdu = "ur";uyghur = "ug";uzbek = "uz";vietnamese = "vi";welsh = "cy";xhosa = "xh";yiddish = "yi";yoruba = "yo";zulu = "zu"
 
 # 翻訳定義 （リアルタイム） 
-if red == "業務放送（デモ）":
+if red == "業務放送（運用）":
     submit_btn = st.button("業務放送（運用）翻訳START")
     if submit_btn:
         #githubのURL指定（録音データをこのディレクトリに格納する.pyを作成予定）
@@ -235,7 +235,7 @@ if red == "業務放送（デモ）":
         
         st.success("------translate success-----")
 
-if red == "デバイス音声データ翻訳（テストモード　端末の.wavファイルを翻訳します）":
+if red == "デバイス音声データ翻訳（テストモード）":
     # 音声ファイルをアップロードする
     audio_file = st.file_uploader("音声ファイルをアップロードしてください", type=["mp3", "wav"])
     submit_btn = st.button("送信")
