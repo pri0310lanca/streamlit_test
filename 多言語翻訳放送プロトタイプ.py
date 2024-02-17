@@ -33,7 +33,7 @@ st.set_page_config(
     #config['cookie']['key'],
     #config['cookie']['expiry_days'],
     #config['preauthorized'],
-)
+#)
 
 #name, authentication_status, username = authenticator.login('Login', 'main')
 
