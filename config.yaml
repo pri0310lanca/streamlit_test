@@ -7,7 +7,7 @@ credentials:
     tuusintouhoku:
       email: hoge@hoge.com
       name: Hoge chan
-      password: $2b$12$LmY3Liu4RqtIO.JrgbXRhe5nvgLXNi/CORNWuxfjrcLCbxyOdDmSi
+      password: $2b$12$ymcOC/rOmoiq2GQr..QpR.Tv1zvgbTJNlPQXpwPB4Qkr9cvWY4rga
 preauthorized:
   emails:
   - melsby@gmail.com
