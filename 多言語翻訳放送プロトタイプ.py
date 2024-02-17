@@ -17,7 +17,7 @@ import urllib.request
 
 #webブラウザ設定
 st.set_page_config(
-     page_title="多言語翻訳放送プロトタイプ",
+     page_title="超多言語放送プロトタイプ",
      page_icon="🧊",
      layout="centered",
      initial_sidebar_state="expanded",
@@ -25,9 +25,9 @@ st.set_page_config(
 
 
 #音声入力選択
-red =st.sidebar.radio("モードセレクト",["業務放送（デモ）","デバイス音声データ翻訳"]) 
+red =st.sidebar.radio("モードセレクト",["業務放送（運用）","デバイス音声データ翻訳（テストモード）"]) 
 #HTML表示UI設定
-st.title("多言語翻訳放送プロトタイプ")
+st.title("超多言語放送プロトタイプ")
 #st.subheader("with googletrans")
 
 #翻訳言語選択
@@ -172,7 +172,7 @@ thai = "th";turkish = "tr";ukrainian = "uk";urdu = "ur";uyghur = "ug";uzbek = "u
 
 # 翻訳定義 （リアルタイム） 
 if red == "業務放送（デモ）":
-    submit_btn = st.button("業務放送（デモ）翻訳START")
+    submit_btn = st.button("業務放送（運用）翻訳START")
     if submit_btn:
         #githubのURL指定（録音データをこのディレクトリに格納する.pyを作成予定）
         url = "https://github.com/pri0310lanca/streamlit_test/raw/main/isshoniganbattemiyou_01.wav"
@@ -235,7 +235,7 @@ if red == "業務放送（デモ）":
         
         st.success("------translate success-----")
 
-if red == "デバイス音声データ翻訳":
+if red == "デバイス音声データ翻訳（テストモード　端末の.wavファイルを翻訳します）":
     # 音声ファイルをアップロードする
     audio_file = st.file_uploader("音声ファイルをアップロードしてください", type=["mp3", "wav"])
     submit_btn = st.button("送信")
