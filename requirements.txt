@@ -1,4 +1,4 @@
-streamlit
+streamlit-nightly
 Translator
 googletrans==3.1.0a0
 SpeechRecognition
