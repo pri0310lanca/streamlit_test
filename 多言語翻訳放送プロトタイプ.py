@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit-nightly as st
 import speech_recognition as sr
 import speech_recognition
 from googletrans import Translator
