@@ -220,7 +220,7 @@ if red == "業務放送（運用）":
         tts_en.save('word2.mp3')
         audio_file = open('word2.mp3', 'rb')
         audio_bytes = audio_file.read()
-        st.audio(audio_bytes, format='audio/MP3')
+        st.audio(audio_bytes, format='audio/mpeg')
         sample_rate = 44100  # 44100 samples per second
         seconds = 2  # Note duration of 2 seconds
         frequency_la = 440  # Our played note will be 440 Hz
