@@ -220,6 +220,7 @@ if red == "業務放送（運用）":
         tts_en.save('word2.mp3')
         audio_file = open('word2.mp3', 'rb')
         audio_bytes = audio_file.read()
+        #safari= .wav only↓
         st.audio(audio_bytes, format='audio/wav')
         sample_rate = 44100  # 44100 samples per second
         seconds = 2  # Note duration of 2 seconds
@@ -271,7 +272,7 @@ if red == "デバイス音声データ翻訳（テストモード）":
         audio_file = open('word2.mp3', 'rb')
         audio_bytes = audio_file.read()
 
-        st.audio(audio_bytes, format='audio/ogg')
+        st.audio(audio_bytes, format='audio/wav')
 
         sample_rate = 44100  # 44100 samples per second
         seconds = 2  # Note duration of 2 seconds
