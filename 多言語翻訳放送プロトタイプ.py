@@ -175,7 +175,7 @@ if red == "業務放送（運用）":
     submit_btn = st.button("業務放送（運用）翻訳START")
     if submit_btn:
         #githubのURL指定（録音データをこのディレクトリに格納する.pyを作成予定）
-        url = "https://github.com/pri0310lanca/streamlit_test/demo.wav"
+        url = "https://github.com/pri0310lanca/streamlit_test/raw/main/demo.wav"
         #response = requests.get(url)
         save_name = "audio_download"
         audio_file = urllib.request.urlopen(url).read()
